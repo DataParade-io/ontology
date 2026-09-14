@@ -21,6 +21,14 @@ classes:
       - id
       - name
       - description
+  System:
+    is_a: NamedThing
+    description: >-
+      A software system (C4). Stub class for CI; full model lands in DATAP-641.
+    attributes:
+      in_scope:
+        range: boolean
+        description: True when this system is the focus of a system-context diagram.
 slots:
   id:
     identifier: true
