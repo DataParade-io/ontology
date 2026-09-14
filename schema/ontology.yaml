@@ -3,38 +3,18 @@ name: dataparade_ontology
 title: DataParade Ontology
 description: >-
   Public LinkML schema for DataParade architecture and privacy knowledge graphs
-  (C4 projections). Structural modules (static, portfolio, deployment, privacy)
-  will land here; taxonomies live under taxonomy/; public aliases under catalog/.
+  (C4 projections). Author here; OWL/SKOS may be generated later under generated/.
 license: MIT
-version: 0.0.1
+version: 0.1.0
 prefixes:
   linkml: https://w3id.org/linkml/
   dp: https://w3id.org/dataparade/ontology/
 default_prefix: dp
+default_range: string
 imports:
   - linkml:types
-classes:
-  NamedThing:
-    abstract: true
-    description: Base for identifiable entities in the knowledge graph.
-    slots:
-      - id
-      - name
-      - description
-  System:
-    is_a: NamedThing
-    description: >-
-      A software system (C4). Stub class for CI; full model lands in DATAP-641.
-    attributes:
-      in_scope:
-        range: boolean
-        description: True when this system is the focus of a system-context diagram.
-slots:
-  id:
-    identifier: true
-    range: uriorcurie
-    required: true
-  name:
-    range: string
-  description:
-    range: string
+  - core
+  - static
+  - portfolio
+  - deployment
+  - privacy

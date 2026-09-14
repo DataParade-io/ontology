@@ -1,0 +1,22 @@
+id: https://w3id.org/dataparade/ontology/taxonomy/actor-kind
+name: dataparade_actor_kind
+title: ActorKind vocabulary
+description: Controlled vocabulary for Actor (person, role, or persona).
+license: MIT
+prefixes:
+  linkml: https://w3id.org/linkml/
+  dp: https://w3id.org/dataparade/ontology/
+default_prefix: dp
+imports:
+  - linkml:types
+
+enums:
+  ActorKind:
+    description: How an Actor should be interpreted on C4 context/landscape views.
+    permissible_values:
+      person:
+        description: A named or unnamed human (or a stand-in for one).
+      role:
+        description: An organizational or job role that many people may occupy.
+      persona:
+        description: A product persona used in design, not a specific human.

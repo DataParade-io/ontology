@@ -1,0 +1,29 @@
+id: https://w3id.org/dataparade/ontology/taxonomy/external-system-category
+name: dataparade_external_system_category
+title: ExternalSystemCategory vocabulary
+description: >-
+  Rollup buckets for ExternalSystem. Aligned with scanner third-party subtypes
+  where those names are already a public vocabulary; not a substitute for catalog aliases.
+license: MIT
+prefixes:
+  linkml: https://w3id.org/linkml/
+  dp: https://w3id.org/dataparade/ontology/
+default_prefix: dp
+imports:
+  - linkml:types
+
+enums:
+  ExternalSystemCategory:
+    description: Category for an external (out-of-scope) system.
+    permissible_values:
+      payment_processor:
+      ai_provider:
+      cloud_provider:
+      saas_service:
+      auth_provider:
+      email_provider:
+      analytics:
+      monitoring:
+      messaging:
+      crm:
+      other:

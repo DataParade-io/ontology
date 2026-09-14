@@ -1,0 +1,28 @@
+id: https://w3id.org/dataparade/ontology/portfolio
+name: dataparade_portfolio
+title: DataParade ontology — portfolio
+description: Enterprise/org/department Scope and membership of Systems.
+license: MIT
+prefixes:
+  linkml: https://w3id.org/linkml/
+  dp: https://w3id.org/dataparade/ontology/
+default_prefix: dp
+default_range: string
+imports:
+  - core
+  - static
+
+classes:
+  Scope:
+    is_a: NamedThing
+    mixins:
+      - Evidenced
+    description: Enterprise, organization, or department grouping for landscape diagrams.
+    slots:
+      - in_portfolio
+
+slots:
+  in_portfolio:
+    range: System
+    multivalued: true
+    description: Systems that belong to this Scope.

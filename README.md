@@ -9,12 +9,14 @@ Prefer the full word **vocabulary** in prose. The folder for controlled term set
 ## Layout
 
 ```text
-schema/       # LinkML classes and slots
-taxonomy/     # controlled vocabularies (enums / hierarchies)
-catalog/      # public seed aliases
+schema/       # LinkML classes and slots (static, portfolio, deployment, privacy)
+taxonomy/     # DataCategory, Purpose, ActorKind, ExternalSystemCategory
+catalog/      # public seed aliases (DATAP-642)
 generated/    # JSON Schema, docs; later OWL/SKOS
 ```
 
+Validate locally: `linkml validate schema/ontology.yaml`
+
 ## Status
 
-Initial stub for [DATAP-655](https://dataparade.atlassian.net/browse/DATAP-655) under epic [DATAP-640](https://dataparade.atlassian.net/browse/DATAP-640).
+[DATAP-641](https://dataparade.atlassian.net/browse/DATAP-641) schema and [DATAP-654](https://dataparade.atlassian.net/browse/DATAP-654) taxonomy seeds. Epic [DATAP-640](https://dataparade.atlassian.net/browse/DATAP-640).

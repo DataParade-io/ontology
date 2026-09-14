@@ -1,14 +1,16 @@
 # taxonomy/
 
-Controlled vocabularies (often hierarchical) used by the schema.
+Controlled vocabularies used by the schema. Prefer the word **vocabulary** in prose; this folder is `taxonomy/` (not an abbreviation).
 
-Prefer the full word **vocabulary** in prose; this folder is named `taxonomy/`.
+Each file is a LinkML enum module imported by `schema/core.yaml`:
 
-Starter taxonomies (see [DATAP-654](https://dataparade.atlassian.net/browse/DATAP-654)):
+| File | Enum | Use |
+|------|------|-----|
+| `data_category.yaml` | `DataCategory` | Kinds of data on `sends_data_to` |
+| `purpose.yaml` | `Purpose` | Why a flow exists |
+| `actor_kind.yaml` | `ActorKind` | Person / role / persona |
+| `external_system_category.yaml` | `ExternalSystemCategory` | Rollup bucket for `ExternalSystem` |
 
-- DataCategory
-- Purpose
-- ActorKind
-- ExternalSystemCategory
+These are often hierarchical (`DataCategory` uses `is_a` on permissible values). Customer-specific terms stay closed. Public seed **aliases** (package → system) belong in `../catalog/`, not here.
 
-These are separate from `catalog/` (public seed aliases for rollup).
+See [DATAP-654](https://dataparade.atlassian.net/browse/DATAP-654).

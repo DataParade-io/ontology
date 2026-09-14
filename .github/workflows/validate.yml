@@ -15,11 +15,13 @@ jobs:
           python-version: "3.12"
       - name: Install LinkML
         run: pip install "linkml>=1.8"
-      - name: Validate and generate JSON Schema
+      - name: Validate schema and taxonomies
+        run: |
+          linkml validate schema/ontology.yaml
+          linkml validate taxonomy/*.yaml
+      - name: Generate JSON Schema
         run: |
           mkdir -p generated
-          linkml-validate --help >/dev/null 2>&1 || true
-          # Load/convert schema (fails on invalid YAML/metamodel issues)
           gen-json-schema schema/ontology.yaml > generated/ontology.schema.json
           test -s generated/ontology.schema.json
           echo "Generated JSON Schema OK"

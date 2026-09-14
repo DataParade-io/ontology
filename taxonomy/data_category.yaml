@@ -1,0 +1,43 @@
+id: https://w3id.org/dataparade/ontology/taxonomy/data-category
+name: dataparade_data_category
+title: DataCategory vocabulary
+description: >-
+  Controlled vocabulary for kinds of data on privacy/data-flow edges.
+  Hierarchical where useful. Scanner concept leaves stay in DataParade-io/scanner.
+license: MIT
+prefixes:
+  linkml: https://w3id.org/linkml/
+  dp: https://w3id.org/dataparade/ontology/
+default_prefix: dp
+imports:
+  - linkml:types
+
+enums:
+  DataCategory:
+    description: Kind of data moving on a sends_data_to edge.
+    permissible_values:
+      personal:
+        description: Data relating to an identifiable person.
+      identifiers:
+        is_a: personal
+        description: Persistent identifiers (account ids, national ids, usernames).
+      contact:
+        is_a: personal
+        description: Contact details (email, phone, postal address).
+      demographic:
+        is_a: personal
+        description: Demographic or profile attributes (name, date of birth, age).
+      credentials:
+        description: Secrets used to authenticate or authorize (passwords, tokens, keys).
+      financial:
+        description: Payment, bank, and other financial account data.
+      health:
+        description: Health, medical, or insurance data.
+      location:
+        description: Precise or coarse location.
+      communications:
+        description: Message content or metadata (email bodies, chat).
+      commercial:
+        description: Business or customer commercial records that are not otherwise typed.
+      other:
+        description: Data that does not fit a more specific category.

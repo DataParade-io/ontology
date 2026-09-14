@@ -1,0 +1,90 @@
+id: https://w3id.org/dataparade/ontology/core
+name: dataparade_core
+title: DataParade ontology — core
+description: Shared identifiable types, provenance mixin, and structural slots.
+license: MIT
+prefixes:
+  linkml: https://w3id.org/linkml/
+  dp: https://w3id.org/dataparade/ontology/
+default_prefix: dp
+default_range: string
+imports:
+  - linkml:types
+  - ../taxonomy/data_category
+  - ../taxonomy/purpose
+  - ../taxonomy/actor_kind
+  - ../taxonomy/external_system_category
+
+classes:
+  NamedThing:
+    abstract: true
+    description: Identifiable node in the architecture or privacy graph.
+    slots:
+      - id
+      - name
+      - description
+
+  Evidenced:
+    mixin: true
+    abstract: true
+    description: >-
+      Optional citation of scanner findings. Code-derived and deploy-derived
+      views may disagree honestly when they cite different findings.
+    slots:
+      - evidenced_by
+
+  Association:
+    abstract: true
+    mixins:
+      - Evidenced
+    description: Reified edge. Use when the relationship carries attributes or provenance.
+    slots:
+      - source
+      - target
+
+  Finding:
+    is_a: NamedThing
+    description: >-
+      Scanner or ingest evidence, usually off-canvas on C4 diagrams.
+      Not a Discovery. OCSF is an ingest envelope only — not a class here.
+    mixins:
+      - Evidenced
+    slots:
+      - location
+
+slots:
+  id:
+    identifier: true
+    range: uriorcurie
+    required: true
+  name:
+    range: string
+  description:
+    range: string
+  location:
+    range: string
+    description: Optional file, span, or resource locator for a Finding.
+  evidenced_by:
+    range: Finding
+    multivalued: true
+    description: Findings that support this node or edge.
+  source:
+    range: NamedThing
+    required: true
+    description: Origin of a reified association.
+  target:
+    range: NamedThing
+    required: true
+    description: Destination of a reified association.
+  contains:
+    range: NamedThing
+    multivalued: true
+    description: Structural nesting (specialize range per class).
+  interacts_with:
+    range: NamedThing
+    multivalued: true
+    description: Architecture dependency. Not data flow; arrow direction matches the label.
+  uses:
+    range: NamedThing
+    multivalued: true
+    description: Use/dependency edge distinct from data movement.

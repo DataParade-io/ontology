@@ -1,0 +1,48 @@
+id: https://w3id.org/dataparade/ontology/privacy
+name: dataparade_privacy
+title: DataParade ontology — privacy / data flow
+description: >-
+  sends_data_to is distinct from interacts_with / uses. Generators choose which
+  edge set to draw (or offer a toggle).
+license: MIT
+prefixes:
+  linkml: https://w3id.org/linkml/
+  dp: https://w3id.org/dataparade/ontology/
+default_prefix: dp
+default_range: string
+imports:
+  - core
+
+classes:
+  NamedThing:
+    slots:
+      - sends_data_to
+
+  SendsDataTo:
+    is_a: Association
+    description: >-
+      Data/privacy flow from source to target. data_categories and purpose
+      are vocabulary terms, not free text.
+    slots:
+      - data_categories
+      - purpose
+    slot_usage:
+      source:
+        description: Sender.
+      target:
+        description: Receiver.
+
+slots:
+  sends_data_to:
+    range: SendsDataTo
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    description: Privacy/data-flow edges originating at this node.
+  data_categories:
+    range: DataCategory
+    multivalued: true
+    description: Kinds of data on this flow.
+  purpose:
+    range: Purpose
+    description: Why this flow exists. Use unspecified rather than omitting the slot when unknown.

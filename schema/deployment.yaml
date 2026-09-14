@@ -1,0 +1,100 @@
+id: https://w3id.org/dataparade/ontology/deployment
+name: dataparade_deployment
+title: DataParade ontology — deployment
+description: Environment, DeploymentNode, InfrastructureNode, and Instances of System or Container.
+license: MIT
+prefixes:
+  linkml: https://w3id.org/linkml/
+  dp: https://w3id.org/dataparade/ontology/
+default_prefix: dp
+default_range: string
+imports:
+  - core
+  - static
+
+enums:
+  DeploymentNodeKind:
+    description: Nestable deployment node kinds (C4 deployment).
+    permissible_values:
+      physical:
+      vm:
+      kubernetes:
+      pod:
+      execution_environment:
+      other:
+  InfrastructureNodeKind:
+    description: Supporting infrastructure on a deployment diagram.
+    permissible_values:
+      load_balancer:
+      dns:
+      firewall:
+      other:
+
+classes:
+  Environment:
+    is_a: NamedThing
+    description: Named deploy environment (production, staging, development, …).
+
+  DeploymentNode:
+    is_a: NamedThing
+    mixins:
+      - Evidenced
+    description: Nestable runtime node (physical, VM, Kubernetes, pod, execution environment).
+    slots:
+      - node_kind
+      - contains
+      - environment
+    slot_usage:
+      contains:
+        range: DeploymentNode
+        description: Nested deployment nodes.
+
+  InfrastructureNode:
+    is_a: NamedThing
+    mixins:
+      - Evidenced
+    description: Supporting infrastructure (load balancer, DNS, firewall, …).
+    slots:
+      - infrastructure_kind
+      - exposes
+      - routes_to
+      - environment
+
+  Instance:
+    is_a: NamedThing
+    mixins:
+      - Evidenced
+    description: A deployed occurrence of a System or Container in an Environment.
+    slots:
+      - instantiates
+      - environment
+      - deployed_on
+      - runs_on
+
+slots:
+  node_kind:
+    range: DeploymentNodeKind
+  infrastructure_kind:
+    range: InfrastructureNodeKind
+  environment:
+    range: Environment
+    description: Environment this node or instance belongs to.
+  instantiates:
+    description: The System or Container this Instance is an occurrence of.
+    any_of:
+      - range: System
+      - range: Container
+  deployed_on:
+    range: DeploymentNode
+    description: Deployment node that hosts this Instance.
+  runs_on:
+    range: DeploymentNode
+    description: Alias of hosted-on when emphasizing runtime rather than placement.
+  exposes:
+    range: NamedThing
+    multivalued: true
+    description: Endpoints or nodes this infrastructure makes reachable.
+  routes_to:
+    range: NamedThing
+    multivalued: true
+    description: Where this infrastructure forwards traffic.

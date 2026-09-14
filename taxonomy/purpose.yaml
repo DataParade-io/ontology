@@ -1,0 +1,32 @@
+id: https://w3id.org/dataparade/ontology/taxonomy/purpose
+name: dataparade_purpose
+title: Purpose vocabulary
+description: Controlled vocabulary for why data is processed or moved.
+license: MIT
+prefixes:
+  linkml: https://w3id.org/linkml/
+  dp: https://w3id.org/dataparade/ontology/
+default_prefix: dp
+imports:
+  - linkml:types
+
+enums:
+  Purpose:
+    description: Processing or transfer purpose on a sends_data_to edge.
+    permissible_values:
+      service_provision:
+        description: Deliver the core product or service the data subject requested.
+      analytics:
+        description: Measurement, reporting, or product analytics.
+      marketing:
+        description: Advertising, promotion, or outreach.
+      security:
+        description: Security, fraud prevention, or abuse detection.
+      legal_obligation:
+        description: Required by law, regulation, or legal process.
+      research:
+        description: Research not required to provide the service.
+      debugging:
+        description: Troubleshooting, logging, or support diagnostics.
+      unspecified:
+        description: Purpose not yet asserted (explicit gap, not a silent default).

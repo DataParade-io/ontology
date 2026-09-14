@@ -1,0 +1,92 @@
+id: https://w3id.org/dataparade/ontology/static
+name: dataparade_static
+title: DataParade ontology — static (C4 software)
+description: System, Actor, ExternalSystem, Container, Component. CodeElement is omitted for v1.
+license: MIT
+prefixes:
+  linkml: https://w3id.org/linkml/
+  dp: https://w3id.org/dataparade/ontology/
+default_prefix: dp
+default_range: string
+imports:
+  - core
+
+enums:
+  ContainerKind:
+    description: C4 container is an application or a data store inside a System.
+    permissible_values:
+      application:
+      data_store:
+
+classes:
+  System:
+    is_a: NamedThing
+    mixins:
+      - Evidenced
+    description: A software system. in_scope marks the focus of a system-context diagram.
+    slots:
+      - in_scope
+      - contains
+      - interacts_with
+      - uses
+    slot_usage:
+      contains:
+        range: Container
+
+  Actor:
+    is_a: NamedThing
+    mixins:
+      - Evidenced
+    description: Person, role, or persona that interacts with systems.
+    slots:
+      - kind
+      - interacts_with
+      - uses
+
+  ExternalSystem:
+    is_a: NamedThing
+    mixins:
+      - Evidenced
+    description: A system outside the in-scope boundary (C4 "external system").
+    slots:
+      - category
+      - interacts_with
+      - uses
+
+  Container:
+    is_a: NamedThing
+    mixins:
+      - Evidenced
+    description: An application or data store inside a System (C4 container).
+    slots:
+      - container_kind
+      - contains
+      - interacts_with
+      - uses
+    slot_usage:
+      contains:
+        range: Component
+
+  Component:
+    is_a: NamedThing
+    mixins:
+      - Evidenced
+    description: >-
+      Logical building block inside a Container. Changes often; treat as
+      generate-only for diagrams. Scanner subtypes stay in scanner taxonomies.
+    slots:
+      - interacts_with
+      - uses
+
+slots:
+  in_scope:
+    range: boolean
+    description: True when this System is the focus of a system-context diagram.
+  kind:
+    range: ActorKind
+    description: Person, role, or persona.
+  category:
+    range: ExternalSystemCategory
+    description: Rollup bucket for an ExternalSystem.
+  container_kind:
+    range: ContainerKind
