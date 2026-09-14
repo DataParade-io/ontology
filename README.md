@@ -2,6 +2,8 @@
 
 Public **LinkML** schema, **taxonomy**, and **catalog** for DataParade architecture and privacy knowledge graphs (including C4 diagram projections).
 
+Instance knowledge, ingest, diagram generation, and customer-specific aliases stay in closed intelligence (Papyrus); this repo is the public contract.
+
 Prefer the full word **vocabulary** in prose. The folder for controlled term sets is **`taxonomy/`**.
 
 **LinkML** is the authoring format ([linkml.io](https://linkml.io/)). **OWL** (and SKOS for taxonomies) may be **generated** later — not how we author the schema.
