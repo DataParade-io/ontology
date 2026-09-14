@@ -15,10 +15,12 @@ jobs:
           python-version: "3.12"
       - name: Install LinkML
         run: pip install "linkml>=1.8"
-      - name: Validate schema and taxonomies
+      - name: Validate schema, taxonomies, and catalog
         run: |
           linkml validate schema/ontology.yaml
+          linkml validate schema/catalog.yaml
           linkml validate taxonomy/*.yaml
+          linkml validate -s schema/catalog.yaml -C PublicAliasCatalog catalog/external_systems.yaml
       - name: Generate JSON Schema
         run: |
           mkdir -p generated

@@ -10,6 +10,7 @@ LinkML modules for the DataParade public ontology. Author here. Optional OWL/JSO
 | `portfolio.yaml` | `Scope`, `in_portfolio` |
 | `deployment.yaml` | `Environment`, `DeploymentNode`, `InfrastructureNode`, `Instance` |
 | `privacy.yaml` | `SendsDataTo` / `sends_data_to` (`data_categories`, `purpose`) |
+| `catalog.yaml` | Public alias catalog meta-schema (`PublicAliasCatalog`, `ExternalSystemCatalogEntry`) |
 
 `CodeElement` is omitted for v1 (use `Finding.location`). Controlled vocabularies are imported from `../taxonomy/`.
 

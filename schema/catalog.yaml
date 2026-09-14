@@ -1,0 +1,71 @@
+id: https://w3id.org/dataparade/ontology/catalog-schema
+name: dataparade_catalog_schema
+title: DataParade public alias catalog schema
+description: >-
+  Shape of public seed alias files under catalog/. Maps packages, SDK import
+  fragments, hostnames, and match keys to canonical ExternalSystem ids.
+license: MIT
+prefixes:
+  linkml: https://w3id.org/linkml/
+  dp: https://w3id.org/dataparade/ontology/
+default_prefix: dp
+default_range: string
+imports:
+  - linkml:types
+  - ../taxonomy/external_system_category
+
+classes:
+  PublicAliasCatalog:
+    tree_root: true
+    description: Root document for a catalog seed file.
+    attributes:
+      version:
+        range: string
+        required: true
+      entries:
+        range: ExternalSystemCatalogEntry
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+        required: true
+
+  ExternalSystemCatalogEntry:
+    description: >-
+      Rollup target for third-party detection. Ingest resolves any alias match
+      to id (canonical ExternalSystem in instance graphs).
+    attributes:
+      id:
+        range: uriorcurie
+        identifier: true
+        required: true
+      canonical_name:
+        range: string
+        required: true
+      category:
+        range: ExternalSystemCategory
+        required: true
+      aliases:
+        range: AliasBundle
+        required: true
+
+  AliasBundle:
+    description: >-
+      Match surfaces. At least one list should be non-empty per entry.
+      keys is a catch-all (service name, env prefix, registrable domain fragment).
+    attributes:
+      packages:
+        range: string
+        multivalued: true
+        description: Package or module names (npm, PyPI, Composer, Maven coordinates).
+      hosts:
+        range: string
+        multivalued: true
+        description: Hostname or registrable domain (no scheme).
+      import_fragments:
+        range: string
+        multivalued: true
+        description: Substrings matched against import/require statements.
+      keys:
+        range: string
+        multivalued: true
+        description: General match keys used by rollup (aligned with scanner matchKeys).

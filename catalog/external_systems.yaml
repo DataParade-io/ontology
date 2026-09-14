@@ -1,0 +1,330 @@
+version: "0.1.0"
+entries:
+  - id: dp:external/stripe
+    canonical_name: Stripe
+    category: payment_processor
+    aliases:
+      packages:
+        - stripe
+        - stripe/stripe-php
+      hosts:
+        - stripe.com
+        - api.stripe.com
+      import_fragments:
+        - stripe
+      keys:
+        - stripe
+
+  - id: dp:external/braintree
+    canonical_name: Braintree
+    category: payment_processor
+    aliases:
+      packages:
+        - braintree
+      hosts:
+        - braintreepayments.com
+        - api.braintreepayments.com
+      import_fragments:
+        - braintree
+      keys:
+        - braintree
+        - api.braintreepayments.com
+
+  - id: dp:external/adyen
+    canonical_name: Adyen
+    category: payment_processor
+    aliases:
+      packages:
+        - adyen
+      hosts:
+        - adyen.com
+        - checkout.adyen.com
+      import_fragments:
+        - adyen
+      keys:
+        - adyen
+        - checkout.adyen.com
+
+  - id: dp:external/paypal
+    canonical_name: PayPal
+    category: payment_processor
+    aliases:
+      packages:
+        - paypal
+      hosts:
+        - paypal.com
+        - api.paypal.com
+        - paypalobjects.com
+      import_fragments:
+        - paypal
+      keys:
+        - paypal
+        - api.paypal.com
+        - paypalobjects.com
+
+  - id: dp:external/sendgrid
+    canonical_name: SendGrid
+    category: email_provider
+    aliases:
+      packages:
+        - sendgrid
+      hosts:
+        - sendgrid.com
+      import_fragments:
+        - sendgrid
+      keys:
+        - sendgrid
+
+  - id: dp:external/twilio
+    canonical_name: Twilio
+    category: messaging
+    aliases:
+      packages:
+        - twilio
+      hosts:
+        - twilio.com
+        - api.twilio.com
+      import_fragments:
+        - twilio
+      keys:
+        - twilio
+
+  - id: dp:external/firebase
+    canonical_name: Firebase
+    category: saas_service
+    aliases:
+      packages:
+        - firebase
+        - kreait/firebase-php
+      hosts:
+        - firebase.com
+        - firebase.google
+        - firebasestorage.googleapis.com
+      import_fragments:
+        - firebase
+      keys:
+        - firebase
+
+  - id: dp:external/supabase
+    canonical_name: Supabase
+    category: saas_service
+    aliases:
+      packages:
+        - "@supabase/supabase-js"
+        - supabase
+        - supabase-py
+        - supabase_py
+      hosts:
+        - supabase.co
+        - supabase.com
+      import_fragments:
+        - supabase
+      keys:
+        - supabase
+        - supabase.co
+        - supabase.com
+
+  - id: dp:external/openai
+    canonical_name: OpenAI
+    category: ai_provider
+    aliases:
+      packages:
+        - openai
+      hosts:
+        - openai.com
+        - api.openai.com
+      import_fragments:
+        - openai
+      keys:
+        - openai
+
+  - id: dp:external/anthropic
+    canonical_name: Anthropic
+    category: ai_provider
+    aliases:
+      packages:
+        - "@anthropic-ai/"
+        - anthropic
+      hosts:
+        - anthropic.com
+        - api.anthropic.com
+      import_fragments:
+        - "@anthropic-ai/"
+        - anthropic
+      keys:
+        - anthropic
+        - api.anthropic.com
+
+  - id: dp:external/openrouter
+    canonical_name: OpenRouter
+    category: ai_provider
+    aliases:
+      packages:
+        - openrouter
+        - "@openrouter/"
+      hosts:
+        - openrouter.ai
+        - openrouter.com
+      import_fragments:
+        - openrouter
+        - "@openrouter/"
+      keys:
+        - openrouter
+        - openrouter.ai
+        - openrouter.com
+
+  - id: dp:external/google_ai
+    canonical_name: Google AI
+    category: ai_provider
+    aliases:
+      packages:
+        - "@google/genai"
+        - "@google-ai/"
+        - "@google-cloud/vertexai"
+        - vertexai
+      hosts:
+        - generativelanguage.googleapis.com
+        - aiplatform.googleapis.com
+        - vertexai.googleapis.com
+      import_fragments:
+        - "@google/genai"
+        - "@google-cloud/vertexai"
+        - vertexai
+      keys:
+        - google_ai
+        - generativelanguage.googleapis.com
+        - vertexai
+
+  - id: dp:external/clipdrop
+    canonical_name: Clipdrop
+    category: ai_provider
+    aliases:
+      keys:
+        - clipdrop
+        - clipdrop-api.co
+
+  - id: dp:external/thenextleg
+    canonical_name: The Next Leg
+    category: ai_provider
+    aliases:
+      keys:
+        - thenextleg
+        - thenextleg.io
+
+  - id: dp:external/vectorizer
+    canonical_name: Vectorizer
+    category: ai_provider
+    aliases:
+      keys:
+        - vectorizer
+        - vectorizer.ai
+
+  - id: dp:external/aws
+    canonical_name: Amazon Web Services
+    category: cloud_provider
+    aliases:
+      packages:
+        - "@aws-sdk/"
+        - boto3
+        - aws-sdk
+        - awssdk
+        - aws/aws-sdk-php
+        - league/flysystem-aws-s3-v3
+        - flysystem-aws-s3
+      hosts:
+        - amazonaws.com
+        - aws.amazon.com
+      import_fragments:
+        - "@aws-sdk/"
+        - boto3
+        - aws-sdk
+        - awssdk
+        - amazon.
+        - aws/
+      keys:
+        - aws
+        - "@aws-sdk/"
+
+  - id: dp:external/gcp
+    canonical_name: Google Cloud
+    category: cloud_provider
+    aliases:
+      packages:
+        - "@google-cloud/"
+      import_fragments:
+        - "@google-cloud/"
+        - google-cloud
+      keys:
+        - gcp
+        - "@google-cloud/"
+        - google-cloud
+
+  - id: dp:external/azure
+    canonical_name: Microsoft Azure
+    category: cloud_provider
+    aliases:
+      packages:
+        - "@azure/"
+      import_fragments:
+        - "@azure/"
+      keys:
+        - azure
+        - "@azure/"
+
+  - id: dp:external/google_auth
+    canonical_name: Google Sign-In
+    category: auth_provider
+    aliases:
+      packages:
+        - google-auth-library
+        - google_auth_oauthlib
+        - "@react-oauth/google"
+        - googleapis
+      hosts:
+        - accounts.google.com
+        - oauth2.googleapis.com
+        - www.googleapis.com/oauth2
+      import_fragments:
+        - google-auth-library
+        - googleapis
+      keys:
+        - google_auth
+        - accounts.google.com
+        - oauth2.googleapis.com
+        - google-auth-library
+
+  - id: dp:external/auth0
+    canonical_name: Auth0
+    category: auth_provider
+    aliases:
+      packages:
+        - "@auth0/"
+        - auth0/auth0-php
+      hosts:
+        - auth0.com
+      import_fragments:
+        - "@auth0/"
+        - auth0
+      keys:
+        - auth0
+        - auth0.com
+        - AUTH0_
+
+  - id: dp:external/sentry
+    canonical_name: Sentry
+    category: monitoring
+    aliases:
+      packages:
+        - "@sentry/"
+        - sentry
+        - sentry_sdk
+      hosts:
+        - sentry.io
+        - ingest.sentry.io
+      import_fragments:
+        - "@sentry/"
+        - sentry
+      keys:
+        - sentry
+        - sentry.io
+        - sentry_sdk

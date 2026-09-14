@@ -19,6 +19,8 @@ generated/    # JSON Schema, docs; later OWL/SKOS
 
 Validate locally: `linkml validate schema/ontology.yaml`
 
+Validate catalog: `linkml validate -s schema/catalog.yaml catalog/external_systems.yaml`
+
 ## Status
 
-[DATAP-641](https://dataparade.atlassian.net/browse/DATAP-641) schema and [DATAP-654](https://dataparade.atlassian.net/browse/DATAP-654) taxonomy seeds. Epic [DATAP-640](https://dataparade.atlassian.net/browse/DATAP-640).
+Foundation on `main`: [DATAP-641](https://dataparade.atlassian.net/browse/DATAP-641) schema, [DATAP-654](https://dataparade.atlassian.net/browse/DATAP-654) taxonomy, [DATAP-642](https://dataparade.atlassian.net/browse/DATAP-642) catalog seed. Epic [DATAP-640](https://dataparade.atlassian.net/browse/DATAP-640).
