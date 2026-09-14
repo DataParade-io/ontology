@@ -1,0 +1,24 @@
+name: Validate LinkML
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install LinkML
+        run: pip install "linkml>=1.8"
+      - name: Validate schema
+        run: gen-project -d generated schema/ontology.yaml
+      - name: Upload generated artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated
+          path: generated/

@@ -1,0 +1,32 @@
+id: https://w3id.org/dataparade/ontology
+name: dataparade_ontology
+title: DataParade Ontology
+description: >-
+  Public LinkML schema for DataParade architecture and privacy knowledge graphs
+  (C4 projections). Structural modules (static, portfolio, deployment, privacy)
+  will land here; taxonomies live under taxonomy/; public aliases under catalog/.
+license: MIT
+version: 0.0.1
+prefixes:
+  linkml: https://w3id.org/linkml/
+  dp: https://w3id.org/dataparade/ontology/
+default_prefix: dp
+imports:
+  - linkml:types
+classes:
+  NamedThing:
+    abstract: true
+    description: Base for identifiable entities in the knowledge graph.
+    slots:
+      - id
+      - name
+      - description
+slots:
+  id:
+    identifier: true
+    range: uriorcurie
+    required: true
+  name:
+    range: string
+  description:
+    range: string
