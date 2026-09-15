@@ -28,10 +28,12 @@ classes:
     mixin: true
     abstract: true
     description: >-
-      Optional citation of scanner findings. Code-derived and deploy-derived
-      views may disagree honestly when they cite different findings.
+      Optional citation of supporting evidence. Code-derived graph facts cite
+      Discovery (scanner output). Security-event facts may cite Finding (OCSF-ish).
+      The two are not synonyms — do not collapse Discovery into Finding.
     slots:
       - evidenced_by
+      - finding_refs
 
   Association:
     abstract: true
@@ -42,15 +44,25 @@ classes:
       - source
       - target
 
+  Discovery:
+    is_a: NamedThing
+    description: >-
+      Scanner output / code evidence surfaced by the DataParade scanner
+      (components, data flows, locations, subject keys). Usually off-canvas on
+      C4 diagrams. Distinct from Finding (security events).
+    slots:
+      - location
+
   Finding:
     is_a: NamedThing
     description: >-
-      Scanner or ingest evidence, usually off-canvas on C4 diagrams.
-      Not a Discovery. OCSF is an ingest envelope only — not a class here.
-    mixins:
-      - Evidenced
+      Security-event record, OCSF-shaped or OCSF-compatible (GuardDuty, Security
+      Lake, etc.). Distinct from Discovery (scanner code evidence). Do not use
+      Finding as a synonym for scanner output.
     slots:
       - location
+      - ocsf_class_uid
+      - ocsf_category
 
 slots:
   id:
@@ -63,11 +75,25 @@ slots:
     range: string
   location:
     range: string
-    description: Optional file, span, or resource locator for a Finding.
+    description: Optional file, span, resource, or event locator.
   evidenced_by:
+    range: Discovery
+    multivalued: true
+    description: >-
+      Scanner Discoveries that support this node or edge (primary provenance
+      for code-derived C4/privacy facts).
+  finding_refs:
     range: Finding
     multivalued: true
-    description: Findings that support this node or edge.
+    description: >-
+      Security-event Findings (OCSF-ish) that support this node or edge.
+      Not a substitute for evidenced_by / Discovery.
+  ocsf_class_uid:
+    range: string
+    description: Optional OCSF class_uid or equivalent class identifier.
+  ocsf_category:
+    range: string
+    description: Optional OCSF category name or uid.
   source:
     range: NamedThing
     required: true

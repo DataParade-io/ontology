@@ -5,14 +5,25 @@ LinkML modules for the DataParade public ontology. Author here. Optional OWL/JSO
 | File | Contents |
 |------|----------|
 | `ontology.yaml` | Root schema (imports the modules below) |
-| `core.yaml` | `NamedThing`, `Finding`, `Evidenced`, `Association`, shared slots |
+| `core.yaml` | `NamedThing`, `Discovery`, `Finding`, `Evidenced`, `Association`, shared slots |
 | `static.yaml` | `System`, `Actor`, `ExternalSystem`, `Container`, `Component` |
 | `portfolio.yaml` | `Scope`, `in_portfolio` |
 | `deployment.yaml` | `Environment`, `DeploymentNode`, `InfrastructureNode`, `Instance` |
 | `privacy.yaml` | `SendsDataTo` / `sends_data_to` (`data_categories`, `purpose`) |
 | `catalog.yaml` | Public alias catalog meta-schema (`PublicAliasCatalog`, `ExternalSystemCatalogEntry`) |
 
-`CodeElement` is omitted for v1 (use `Finding.location`). Controlled vocabularies are imported from `../taxonomy/`.
+`CodeElement` is omitted for v1 (use `Discovery.location` for scanner spans). Controlled vocabularies are imported from `../taxonomy/`.
+
+## Discovery vs Finding (not synonyms)
+
+| Name | Means | In ontology? |
+|------|--------|----------------|
+| **Discovery** | DataParade scanner output / code evidence. Product/docs noun; scanner code symbol remains `ScanResult` (ingest maps ScanResult → Discovery). | Yes — class `Discovery` |
+| **Finding** | Security-event / OCSF-ish record (GuardDuty, Security Lake, etc.). Not scanner output. Do **not** map Discovery → Finding. | Yes — class `Finding` |
+| Kanbus issue type **"finding"** | Gold-review cards. Neither Discovery nor OCSF Finding. | No — docs quarantine only |
+
+Architecture/privacy facts from the scanner cite `Discovery` via `evidenced_by`. Security-event citations use `finding_refs` → `Finding`.
+
 
 ## Edges
 

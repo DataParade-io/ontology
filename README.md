@@ -4,6 +4,8 @@ Public **LinkML** schema, **taxonomy**, and **catalog** for DataParade architect
 
 Instance knowledge, ingest, diagram generation, and customer-specific aliases stay in closed intelligence (Papyrus); this repo is the public contract.
 
+**Discovery** (scanner code evidence) and **Finding** (security-event / OCSF-ish) are different types — not synonyms.
+
 Prefer the full word **vocabulary** in prose. The folder for controlled term sets is **`taxonomy/`**.
 
 **LinkML** is the authoring format ([linkml.io](https://linkml.io/)). **OWL** (and SKOS for taxonomies) may be **generated** later — not how we author the schema.
