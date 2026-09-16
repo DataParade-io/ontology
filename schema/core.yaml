@@ -15,6 +15,20 @@ imports:
   - ../taxonomy/actor_kind
   - ../taxonomy/external_system_category
 
+enums:
+  DiscoverySource:
+    description: >-
+      Immutable evidence channel for a Discovery. Set at create time; never
+      retcon (e.g. interview → scan). Corrections use a new Discovery with
+      supersedes, not source edits.
+    permissible_values:
+      scan:
+        description: Code/static analysis or scanner ingest.
+      cloud:
+        description: Cloud API or infrastructure observation.
+      interview:
+        description: Human stakeholder interview. Never masquerade as scan.
+
 classes:
   NamedThing:
     abstract: true
@@ -28,11 +42,11 @@ classes:
     mixin: true
     abstract: true
     description: >-
-      Optional citation of supporting evidence. Code-derived graph facts cite
-      Discovery (scanner output). Security-event facts may cite Finding (OCSF-ish).
+      Optional citation of supporting evidence. Graph facts cite Discovery
+      (sourced assertions). Security-event facts may cite Finding (OCSF-ish).
       The two are not synonyms — do not collapse Discovery into Finding.
     slots:
-      - evidenced_by
+      - asserted_by
       - finding_refs
 
   Association:
@@ -47,18 +61,37 @@ classes:
   Discovery:
     is_a: NamedThing
     description: >-
-      Scanner output / code evidence surfaced by the DataParade scanner
-      (components, data flows, locations, subject keys). Usually off-canvas on
-      C4 diagrams. Distinct from Finding (security events).
+      Sourced assertion of a graph fact in the same ontology graph — a learning
+      record with mandatory immutable source (scan, cloud, or interview). Entities
+      (System, Actor, ExternalSystem, SendsDataTo, …) stay entities; they are
+      not subclasses of Discovery. Distinct from Finding (security events).
     slots:
+      - source
+      - asserted_at
+      - asserts
+      - asserted_slot
+      - asserted_value
       - location
+      - raw_evidence_ref
+      - reviewer
+      - reviewed_at
+      - brief_sha
+      - skill_sha
+      - supersedes
+    slot_usage:
+      source:
+        range: DiscoverySource
+        required: true
+        description: >-
+          Immutable after create. Never retcon source (e.g. interview → scan).
+          Corrections use a new Discovery with supersedes.
 
   Finding:
     is_a: NamedThing
     description: >-
       Security-event record, OCSF-shaped or OCSF-compatible (GuardDuty, Security
-      Lake, etc.). Distinct from Discovery (scanner code evidence). Do not use
-      Finding as a synonym for scanner output.
+      Lake, etc.). Distinct from Discovery (sourced graph-fact assertions). Do not
+      use Finding as a synonym for scanner output or interview answers.
     slots:
       - location
       - ocsf_class_uid
@@ -76,18 +109,64 @@ slots:
   location:
     range: string
     description: Optional file, span, resource, or event locator.
-  evidenced_by:
+  asserted_by:
     range: Discovery
     multivalued: true
     description: >-
-      Scanner Discoveries that support this node or edge (primary provenance
-      for code-derived C4/privacy facts).
+      Discoveries that assert this graph fact. Filter by Discovery.source
+      (scan, cloud, interview). Replaces evidenced_by (0.1).
   finding_refs:
     range: Finding
     multivalued: true
     description: >-
       Security-event Findings (OCSF-ish) that support this node or edge.
-      Not a substitute for evidenced_by / Discovery.
+      Not a substitute for asserted_by / Discovery.
+  asserted_at:
+    range: datetime
+    required: true
+    description: When the assertion was made or observed.
+  asserts:
+    range: uriorcurie
+    required: true
+    description: >-
+      URI of the graph entity or association instance this Discovery asserts
+      (e.g. Actor, System, SendsDataTo edge object).
+  asserted_slot:
+    range: string
+    description: >-
+      Which attribute on asserts is being set (e.g. actor_kind, data_categories,
+      purpose, in_scope). Omit when the Discovery asserts entity existence only.
+  asserted_value:
+    range: string
+    description: >-
+      Ontology-shaped value for asserted_slot (enum token, JSON-encoded enum
+      list, or approved text per slot rules).
+  raw_evidence_ref:
+    range: string
+    description: >-
+      Pointer to unedited transcript, notes, or API dump. Required for
+      interview-sourced Discoveries that land in living KB; recommended for
+      scan/cloud. Not mapper-only JSON.
+  reviewer:
+    range: string
+    description: >-
+      Human who approved landing an interview-sourced Discovery into living KB.
+      Must be a person — not the interview model, coding agent, or automated
+      rubric pass.
+  reviewed_at:
+    range: datetime
+    description: When reviewer approved the land (paired with reviewer).
+  brief_sha:
+    range: string
+    description: Full SHA of the brief pin when asserted under an interview skill/brief.
+  skill_sha:
+    range: string
+    description: Full SHA of the skill contract when asserted under an interview.
+  supersedes:
+    range: Discovery
+    description: >-
+      Prior Discovery this assertion replaces. Use for audit; no silent
+      overwrite or source retcon.
   ocsf_class_uid:
     range: string
     description: Optional OCSF class_uid or equivalent class identifier.
@@ -97,7 +176,7 @@ slots:
   source:
     range: NamedThing
     required: true
-    description: Origin of a reified association.
+    description: Origin of a reified association (Association.source / target endpoints).
   target:
     range: NamedThing
     required: true

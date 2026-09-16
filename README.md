@@ -4,7 +4,7 @@ Public **LinkML** schema, **taxonomy**, and **catalog** for DataParade architect
 
 Instance knowledge, ingest, diagram generation, and customer-specific aliases stay in closed intelligence (Papyrus); this repo is the public contract.
 
-**Discovery** (scanner code evidence) and **Finding** (security-event / OCSF-ish) are different types — not synonyms.
+**Discovery** (sourced assertion of a graph fact — `scan` | `cloud` | `interview`) and **Finding** (security-event / OCSF-ish) are different types — not synonyms.
 
 Prefer the full word **vocabulary** in prose. The folder for controlled term sets is **`taxonomy/`**.
 
@@ -25,4 +25,4 @@ Validate catalog: `linkml validate -s schema/catalog.yaml catalog/external_syste
 
 ## Status
 
-Foundation on `main`: [DATAP-641](https://dataparade.atlassian.net/browse/DATAP-641) schema, [DATAP-654](https://dataparade.atlassian.net/browse/DATAP-654) taxonomy, [DATAP-642](https://dataparade.atlassian.net/browse/DATAP-642) catalog seed. Epic [DATAP-640](https://dataparade.atlassian.net/browse/DATAP-640).
+Schema **0.2.0** ([DATAP-684](https://dataparade.atlassian.net/browse/DATAP-684)): Discovery as sourced graph-fact assertion per [DATAP-681](https://dataparade.atlassian.net/browse/DATAP-681). Prior foundation: [DATAP-641](https://dataparade.atlassian.net/browse/DATAP-641), [DATAP-654](https://dataparade.atlassian.net/browse/DATAP-654), [DATAP-642](https://dataparade.atlassian.net/browse/DATAP-642). Epic [DATAP-680](https://dataparade.atlassian.net/browse/DATAP-680).
