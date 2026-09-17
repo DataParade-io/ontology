@@ -16,7 +16,8 @@ Prefer the full word **vocabulary** in prose. The folder for controlled term set
 schema/       # LinkML classes and slots (static, portfolio, deployment, privacy)
 taxonomy/     # DataCategory, Purpose, ActorKind, ExternalSystemCategory
 catalog/      # public seed aliases (DATAP-642)
-generated/    # JSON Schema, docs; later OWL/SKOS
+ocsf/         # OCSF Architecture Discovery extension (DATAP-696) — wire format
+generated/    # JSON Schema (LinkML + OCSF Discovery record)
 ```
 
 Validate locally: `linkml validate schema/ontology.yaml`
@@ -25,4 +26,4 @@ Validate catalog: `linkml validate -s schema/catalog.yaml catalog/external_syste
 
 ## Status
 
-Schema **0.2.0** ([DATAP-684](https://dataparade.atlassian.net/browse/DATAP-684)): Discovery as sourced graph-fact assertion per [DATAP-681](https://dataparade.atlassian.net/browse/DATAP-681). Prior foundation: [DATAP-641](https://dataparade.atlassian.net/browse/DATAP-641), [DATAP-654](https://dataparade.atlassian.net/browse/DATAP-654), [DATAP-642](https://dataparade.atlassian.net/browse/DATAP-642). Epic [DATAP-680](https://dataparade.atlassian.net/browse/DATAP-680).
+Schema **0.3.0** ([DATAP-696](https://dataparade.atlassian.net/browse/DATAP-696)): OCSF **Architecture Discovery** extension (`ocsf/`, OCSF base **1.7.0**). LinkML `Discovery` unchanged from **0.2.0** ([DATAP-684](https://dataparade.atlassian.net/browse/DATAP-684)). Epic [DATAP-680](https://dataparade.atlassian.net/browse/DATAP-680).

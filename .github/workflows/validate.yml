@@ -26,6 +26,9 @@ jobs:
           mkdir -p generated
           gen-json-schema schema/ontology.yaml > generated/ontology.schema.json
           test -s generated/ontology.schema.json
+          test -s generated/ocsf-discovery.schema.json
+          python -c "import json; json.load(open('generated/ocsf-discovery.schema.json'))"
+          python -c "import json; json.load(open('ocsf/extension/dataparade_discovery.json'))"
           echo "Generated JSON Schema OK"
       - name: Upload generated artifacts
         uses: actions/upload-artifact@v4

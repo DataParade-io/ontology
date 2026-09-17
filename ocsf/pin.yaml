@@ -1,0 +1,9 @@
+# Pinned interchange versions for DataParade OCSF Discovery extension (DATAP-696).
+ocsf_base_version: "1.7.0"
+ocsf_base_schema_url: "https://schema.ocsf.io/1.7.0"
+extension_name: dataparade_discovery
+extension_version: "1.0.0"
+linkml_ontology_version: "0.3.0"
+architecture_category_uid: 9001
+architecture_discovery_class_uid: 900101
+architecture_discovery_type_uid: 90010101

@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.3.0 — DATAP-696
+
+**OCSF Architecture Discovery extension** — wire format for Discoveries in OCSF lake/interchange (OCSF base **1.7.0**).
+
+### Added
+
+- `ocsf/` — extension manifest (`extension/dataparade_discovery.json`), pins (`pin.yaml`), README (field table + Finding↔Discovery join rules)
+- `generated/ocsf-discovery.schema.json` — JSON Schema for Architecture Discovery records (`class_uid` 900101)
+- Architecture category `9001` / class `900101` — distinct from OCSF Finding category `2`
+
+### Unchanged
+
+- LinkML `Discovery` / `Finding` classes in `schema/core.yaml` (semantic model from 0.2.0)
+- Taxonomy enums
+
 ## 0.2.0 — DATAP-684
 
 **Discovery reshape** per [DATAP-681](https://dataparade.atlassian.net/browse/DATAP-681): sourced assertion of a graph fact (not scanner-only).

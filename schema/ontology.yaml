@@ -5,7 +5,7 @@ description: >-
   Public LinkML schema for DataParade architecture and privacy knowledge graphs
   (C4 projections). Author here; OWL/SKOS may be generated later under generated/.
 license: MIT
-version: 0.2.0
+version: 0.3.0
 prefixes:
   linkml: https://w3id.org/linkml/
   dp: https://w3id.org/dataparade/ontology/

@@ -1,0 +1,65 @@
+{
+  "name": "dataparade_discovery",
+  "version": "1.0.0",
+  "uid": 9001,
+  "caption": "DataParade architecture and privacy graph Discoveries",
+  "description": "OCSF extension for DataParade Discovery records — sourced graph-fact assertions distinct from OCSF Finding security events.",
+  "extends": "base",
+  "ocsf_base_version": "1.7.0",
+  "linkml_ontology_version": "0.3.0",
+  "profiles": ["architecture_privacy"],
+  "categories": [
+    {
+      "name": "Architecture",
+      "uid": 9001,
+      "caption": "Architecture and privacy graph facts",
+      "description": "DataParade Discoveries — not security Findings (category 2)."
+    }
+  ],
+  "classes": [
+    {
+      "name": "Architecture Discovery",
+      "uid": 900101,
+      "category": "Architecture",
+      "category_uid": 9001,
+      "caption": "Sourced graph-fact assertion",
+      "description": "DataParade Discovery serialized for OCSF lake/interchange. Distinct from Finding.",
+      "attributes": {
+        "dataparade": {
+          "requirement": "required",
+          "type": "dataparade_discovery_t",
+          "description": "DataParade Discovery payload (LinkML-aligned)."
+        }
+      }
+    }
+  ],
+  "types": {
+    "dataparade_discovery_t": {
+      "type": "object",
+      "description": "LinkML Discovery fields on the wire.",
+      "attributes": {
+        "record_kind": { "type": "string_t", "enum": ["discovery"] },
+        "ontology_version": { "type": "string_t" },
+        "source": { "type": "string_t", "enum": ["scan", "cloud", "interview"] },
+        "asserted_at": { "type": "timestamp_t" },
+        "asserts": { "type": "string_t" },
+        "asserted_slot": { "type": "string_t" },
+        "asserted_value": { "type": "string_t" },
+        "eligible_shape": { "type": "string_t", "enum": ["D2", "D4", "D7", "D8"] },
+        "raw_evidence_ref": { "type": "string_t" },
+        "reviewer": { "type": "string_t" },
+        "reviewed_at": { "type": "timestamp_t" },
+        "brief_sha": { "type": "string_t" },
+        "skill_sha": { "type": "string_t" },
+        "supersedes": { "type": "string_t" },
+        "related_resource_refs": { "type": "array", "items": { "type": "string_t" } }
+      }
+    }
+  },
+  "finding_discovery_link": {
+    "primary": "Finding.resources[].uid resolves to Discovery.asserts via entity resolution",
+    "secondary_finding": "Finding.unmapped.dataparade.related_discovery_ids[]",
+    "secondary_discovery": "dataparade.related_resource_refs[]",
+    "conflict_rule": "scan wins identity; interview does not overwrite scan-backed asserts+slot"
+  }
+}
