@@ -1,0 +1,25 @@
+{
+  "name": "@dataparade/ontology",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Release tooling for the DataParade public ontology. The contract is the GitHub release, not an npm package.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DataParade-io/ontology.git"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "release": "semantic-release"
+  },
+  "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^13.0.1",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^11.0.1",
+    "@semantic-release/release-notes-generator": "^14.0.3",
+    "semantic-release": "^24.2.3"
+  }
+}

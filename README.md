@@ -24,6 +24,10 @@ Validate locally: `linkml validate schema/ontology.yaml`
 
 Validate catalog: `linkml validate -s schema/catalog.yaml catalog/external_systems.yaml`
 
+## Releases
+
+Pushes to `main` run [Semantic Release](https://github.com/semantic-release/semantic-release) (same Angular commit types as `scanner`). A `feat` or `fix` commit cuts a GitHub release and updates `CHANGELOG.md`. This repo is not published to npm. Consumers should pin the release tag.
+
 ## Status
 
 Schema **0.3.0** ([DATAP-696](https://dataparade.atlassian.net/browse/DATAP-696)): OCSF **Architecture Discovery** extension (`ocsf/`, OCSF base **1.7.0**). LinkML `Discovery` unchanged from **0.2.0** ([DATAP-684](https://dataparade.atlassian.net/browse/DATAP-684)). Epic [DATAP-680](https://dataparade.atlassian.net/browse/DATAP-680).
