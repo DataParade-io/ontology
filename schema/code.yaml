@@ -1,0 +1,201 @@
+id: https://w3id.org/dataparade/ontology/code
+name: dataparade_code
+title: DataParade ontology — code structure and data occurrences
+description: >-
+  Line-level evidence for data in code. CodeElement is the code-structure layer,
+  aligned with graphify (https://github.com/Graphify-Labs/graphify) node kinds and
+  ids. DataItem, DataItemGroup and Occurrence are DataParade's layer on top: which
+  data the code handles and exactly where. "Occurrence" follows Sourcegraph SCIP:
+  one place a symbol appears in code, with its location and role. Edges carry
+  graphify-style confidence (EXTRACTED when the code states it, INFERRED when it was
+  deduced, AMBIGUOUS when uncertain).
+license: MIT
+prefixes:
+  linkml: https://w3id.org/linkml/
+  dp: https://w3id.org/dataparade/ontology/
+default_prefix: dp
+default_range: string
+imports:
+  - linkml:types
+  - core
+  - static
+  - privacy
+
+enums:
+  CodeElementKind:
+    description: Kinds of code-structure nodes, as graphify extracts them.
+    permissible_values:
+      file:
+      module:
+      class:
+      function:
+      method:
+      constant:
+        description: Module-level constant or exported binding.
+  OccurrenceLocation:
+    permissible_values:
+      code:
+      comment:
+        description: The match sits only in a comment or docstring; kept as context.
+  ConfidenceTag:
+    description: graphify's edge confidence vocabulary.
+    permissible_values:
+      EXTRACTED:
+        description: Stated directly in the code (a declaration, a call, a containment).
+      INFERRED:
+        description: Deduced by the scanner; carries a confidence_score.
+      AMBIGUOUS:
+        description: Uncertain; flagged for review.
+  GroupBasis:
+    description: The evidence that put an occurrence in its data item group.
+    permissible_values:
+      declaration:
+      name:
+        description: A qualifier on the line or a defined field.
+      receiver-vote:
+        description: The class of the object the value is read from or passed to.
+      table-vote:
+        description: The one table the enclosing function queries.
+      weak-name:
+        description: A name taken from a receiver variable only.
+      file-vote:
+        description: The entity of a model, service, controller or repository file.
+      location:
+        description: A singleton named after its own line.
+
+classes:
+  CodeElement:
+    is_a: NamedThing
+    mixins:
+      - Evidenced
+    description: >-
+      A file, class, function, method or constant in a codebase. One node of the
+      code-structure graph; the same element graphify emits.
+    slots:
+      - code_element_kind
+      - graphify_id
+      - source_file
+      - start_line
+
+  DataItem:
+    is_a: NamedThing
+    mixins:
+      - Evidenced
+    description: >-
+      A personal or sensitive data concept the code handles, such as email.
+      Specific data items within it (a member's account email, a staff user's
+      email) are DataItemGroups.
+    slots:
+      - labels
+
+  DataItemGroup:
+    is_a: NamedThing
+    mixins:
+      - Evidenced
+    description: >-
+      One specific data item within a concept: the occurrences that hold the same
+      value for the same subject (for example, the member account email).
+    slots:
+      - part_of_data_item
+
+  Occurrence:
+    is_a: NamedThing
+    mixins:
+      - Evidenced
+    description: >-
+      One place in code where a data item appears, with its location and role.
+      The line-level evidence for data items, components and flows.
+    slots:
+      - source_file
+      - start_line
+      - end_line
+      - code
+      - labels
+      - occurrence_location
+
+  OccurrenceOf:
+    is_a: Association
+    description: The data item group (or data item) an occurrence belongs to.
+    slots:
+      - confidence_tag
+      - confidence_score
+      - group_basis
+    slot_usage:
+      source:
+        range: Occurrence
+      target:
+        range: NamedThing
+        description: A DataItemGroup, or the DataItem when no group is known.
+
+  OccursIn:
+    is_a: Association
+    description: The code element that encloses an occurrence.
+    slots:
+      - confidence_tag
+      - confidence_score
+    slot_usage:
+      source:
+        range: Occurrence
+      target:
+        range: CodeElement
+
+  HandledBy:
+    is_a: Association
+    description: A component that handles a data item group.
+    slots:
+      - confidence_tag
+      - confidence_score
+    slot_usage:
+      source:
+        range: DataItemGroup
+      target:
+        range: Component
+
+  Carries:
+    is_a: Association
+    description: A data item carried by a data flow.
+    slots:
+      - confidence_tag
+      - confidence_score
+    slot_usage:
+      source:
+        range: SendsDataTo
+      target:
+        range: DataItem
+
+slots:
+  code_element_kind:
+    range: CodeElementKind
+  graphify_id:
+    range: string
+    description: >-
+      The node id in graphify's graph.json for the same scan. Ids can change when
+      graphify disambiguates colliding names, so source_file and start_line are the
+      stable locator.
+  source_file:
+    range: string
+    description: Path relative to the scan root, POSIX style.
+  start_line:
+    range: integer
+    minimum_value: 1
+  end_line:
+    range: integer
+    minimum_value: 1
+  code:
+    range: string
+    description: The source text of the occurrence's lines.
+  labels:
+    range: string
+    multivalued: true
+  occurrence_location:
+    range: OccurrenceLocation
+  part_of_data_item:
+    range: DataItem
+  confidence_tag:
+    range: ConfidenceTag
+  confidence_score:
+    range: float
+    minimum_value: 0
+    maximum_value: 1
+  group_basis:
+    range: GroupBasis

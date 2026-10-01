@@ -55,7 +55,7 @@ Aligns 1:1 with LinkML `Discovery` (`schema/core.yaml`).
 | `ontology_version` | yes | LinkML ontology version (e.g. `0.3.0`) |
 | `source` | yes | `scan` \| `cloud` \| `interview` — **immutable** after create |
 | `asserted_at` | yes | ISO-8601 datetime |
-| `asserts` | yes | URI of asserted entity/association (`dp:…`) |
+| `asserts` | yes | URI of asserted entity/association (`dp:…`). Scan entities: `dp:scan/entity/cmp_*` (component), `flow_*` (data flow), `data_item:<concept>` (data item), `occurrence:<concept>:<file>:<line>` (occurrence, the line-level evidence; written as `mention:*` before ontology 0.4.0) |
 | `asserted_slot` | when slot fill | e.g. `actor_kind`, `data_categories`, `purpose`, `in_scope` |
 | `asserted_value` | when `asserted_slot` | Ontology-shaped value (enum token or JSON list string) |
 | `eligible_shape` | interview A0 | `D2` \| `D4` \| `D7` \| `D8` when from interview land |
