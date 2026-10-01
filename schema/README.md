@@ -10,9 +10,10 @@ LinkML modules for the DataParade public ontology. Author here. Optional OWL/JSO
 | `portfolio.yaml` | `Scope`, `in_portfolio` |
 | `deployment.yaml` | `Environment`, `DeploymentNode`, `InfrastructureNode`, `Instance` |
 | `privacy.yaml` | `SendsDataTo` / `sends_data_to` (`data_categories`, `purpose`) |
+| `code.yaml` | `CodeElement` (graphify-aligned), `DataItem`, `DataItemGroup`, `Occurrence`, and the `OccurrenceOf` / `OccursIn` / `HandledBy` / `Carries` associations with graphify-style confidence |
 | `catalog.yaml` | Public alias catalog meta-schema (`PublicAliasCatalog`, `ExternalSystemCatalogEntry`) |
 
-`CodeElement` is omitted for v1 (use `Discovery.location` for scan/cloud locators). Controlled vocabularies are imported from `../taxonomy/`.
+`CodeElement` (0.4+) is the code-structure node graphify emits; DataParade links `Occurrence` evidence to it. `Discovery.location` remains the locator for cloud and interview sources. Controlled vocabularies are imported from `../taxonomy/`.
 
 ## Discovery vs Finding (not synonyms)
 
