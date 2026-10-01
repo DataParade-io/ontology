@@ -49,6 +49,10 @@ enums:
   GroupBasis:
     description: The evidence that put an occurrence in its data item group.
     permissible_values:
+      column:
+        description: A declared catalog column that the occurrences read or write.
+      record-key:
+        description: A key written into a JSON record column.
       declaration:
       name:
         description: A qualifier on the line or a defined field.
